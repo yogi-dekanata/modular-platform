@@ -25,7 +25,18 @@ APPS_DIR = os.path.join('apps')
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-ge_0$fds#h%=zc5htda313qsm1)mdcsdzujfixdky4c3)6z!r="
+
+import os
+from dotenv import load_dotenv
+
+load_dotenv()  # ini WAJIB dipanggil supaya baca file .env
+
+load_dotenv(dotenv_path=BASE_DIR / ".env")
+
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
+
+if not SECRET_KEY:
+    raise Exception("SECRET_KEY is missing! Check your .env file.")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
