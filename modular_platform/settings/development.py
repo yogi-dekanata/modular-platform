@@ -1,6 +1,5 @@
 from .base import *
 
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*']
-# ALLOWED_HOSTS = ['unknown-staci-yogi-dekanata-a89c770c.koyeb.app']
+ALLOWED_HOSTS = ['unknown-staci-yogi-dekanata-a89c770c.koyeb.app']

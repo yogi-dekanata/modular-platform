@@ -25,6 +25,8 @@ from django.shortcuts import redirect
 
 urlpatterns = [
     path('', lambda request: redirect('/product/')),
+    path('accounts/profile/', lambda request: redirect('/product/')),
+
     path('admin/', admin.site.urls),
 
     # Modular Engine Module
@@ -36,6 +38,7 @@ urlpatterns = [
     path('accounts/login/', auth_views.LoginView.as_view(), name='login'),
 
     path('accounts/logout/', auth_views.LogoutView.as_view(), name='logout'),
+
 ]
 
 
