@@ -29,7 +29,7 @@ APPS_DIR = os.path.join('apps')
 import os
 from dotenv import load_dotenv
 
-load_dotenv()  # ini WAJIB dipanggil supaya baca file .env
+load_dotenv()
 
 load_dotenv(dotenv_path=BASE_DIR / ".env")
 
