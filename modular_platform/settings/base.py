@@ -28,7 +28,7 @@ APPS_DIR = os.path.join('apps')
 SECRET_KEY = "django-insecure-ge_0$fds#h%=zc5htda313qsm1)mdcsdzujfixdky4c3)6z!r="
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
