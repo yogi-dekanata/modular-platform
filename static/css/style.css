@@ -1,0 +1,105 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+    padding: 20px;
+    color: #212529;
+}
+
+/* Heading */
+h1, h2 {
+    margin-bottom: 20px;
+    color: #343a40;
+}
+
+/* Table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+thead {
+    background-color: #343a40;
+    color: white;
+}
+
+th, td {
+    padding: 15px 20px;
+    text-align: left;
+    border-bottom: 1px solid #dee2e6;
+    vertical-align: middle;
+}
+
+tbody tr:hover {
+    background-color: #f1f3f5;
+}
+
+/* Form */
+form {
+    margin-bottom: 20px;
+}
+
+input[type="text"],
+input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    background: white;
+    font-size: 14px;
+}
+
+/* Button */
+button {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #0d6efd;
+    color: white;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 5px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0b5ed7;
+}
+
+form button {
+    margin-top: 10px;
+}
+
+/* Action buttons */
+form.inline-form {
+    display: inline;
+}
+
+.actions {
+    display: flex;
+    gap: 5px;
+}
+
+/* Section Card */
+.section {
+    background: white;
+    padding: 20px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}

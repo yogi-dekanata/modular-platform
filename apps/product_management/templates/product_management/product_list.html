@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% load custom_tags %}  <!-- Ini WAJIB, buat akses product|get_item -->
+
+{% block title %}Product Management{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Product Management</h1>
+
+
+<div class="card p-4 shadow-sm mb-5">
+  <h2 class="mb-4">Add New Product</h2>
+  <form method="post" action="{% url 'product_create' %}">
+    {% csrf_token %}
+    <div class="row g-3 align-items-end">
+      {% for column in columns %}
+        {% if column != "id" %}
+          <div class="col-md-3">
+            <label for="{{ column }}" class="form-label">{{ column|capfirst }}</label>
+
+            {% if column == "price" or column == "stock" %}
+              <input type="number" id="{{ column }}" name="{{ column }}" placeholder="{{ column|capfirst }}" class="form-control" required>
+            {% elif column == "expiry_date" %}
+              <input type="date" id="{{ column }}" name="{{ column }}" placeholder="{{ column|capfirst }}" class="form-control">
+            {% else %}
+              <input type="text" id="{{ column }}" name="{{ column }}" placeholder="{{ column|capfirst }}" class="form-control" required>
+            {% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+
+      <div class="col-md-2 d-grid">
+        <button type="submit" class="btn btn-success">
+          ➕ Add Product
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+<div class="table-responsive">
+  <table class="table table-bordered table-hover align-middle">
+    <thead class="table-dark">
+      <tr>
+        {% for column in columns %}
+          <th>{{ column|capfirst }}</th>
+        {% endfor %}
+        <th class="text-center">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for product in products %}
+      <tr>
+        {% for column in columns %}
+          <td>
+            {% if column == "price" or column == "stock" %}
+              <input type="number"
+                     name="{{ column }}"
+                     value="{{ product|get_item:column }}"
+                     class="form-control form-control-sm"
+                     form="form-update-{{ product.id }}"
+                     {% if column == "id" %} readonly {% endif %}
+                     required>
+            {% elif column == "expiry_date" %}
+              <input type="date"
+                     name="{{ column }}"
+                     value="{{ product|get_item:column }}"
+                     class="form-control form-control-sm"
+                     form="form-update-{{ product.id }}"
+                     {% if column == "id" %} readonly {% endif %}>
+            {% else %}
+              <input type="text"
+                     name="{{ column }}"
+                     value="{{ product|get_item:column }}"
+                     class="form-control form-control-sm"
+                     form="form-update-{{ product.id }}"
+                     {% if column == "id" %} readonly {% endif %}
+                     required>
+            {% endif %}
+          </td>
+        {% endfor %}
+        <td class="text-center">
+          <div class="d-flex justify-content-center gap-2">
+            <!-- Update Product -->
+            <form method="post" action="{% url 'product_update' product.id %}" id="form-update-{{ product.id }}">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-sm btn-primary w-100">
+                ✏️ Update
+              </button>
+            </form>
+
+            <!-- Delete Product -->
+            <form method="post" action="{% url 'product_delete' product.id %}" onsubmit="return confirm('Are you sure to delete this data?');">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-sm btn-danger w-100">
+                🗑️ Delete
+              </button>
+            </form>
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}

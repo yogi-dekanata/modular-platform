@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Module Management{% endblock %}
+
+{% block content %}
+
+<!-- ====== Tambahin ini setelah <main> atau setelah <h1> ====== -->
+{% if messages %}
+  {% for m in messages %}
+    <div class="alert alert-{{ m.tags }} alert-dismissible fade show" role="alert">
+      {{ m }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+  {% endfor %}
+{% endif %}
+<h2 class="mb-4">Module Management</h2>
+
+<div class="table-responsive">
+  <table class="table table-bordered table-hover align-middle">
+    <thead class="table-dark">
+      <tr>
+        <th>Name</th>
+        <th>Status</th>
+        <th>Version</th>
+        <th class="text-center">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for module in modules %}
+      <tr>
+        <td>{{ module.name }}</td>
+        <td>{{ module.status }}</td>
+        <td>{{ module.version }}</td>
+        <td class="text-center">
+          <div class="d-flex justify-content-center gap-2">
+            {% if module.status == 'uninstalled' %}
+            <form method="post" action="{% url 'install_module' module.id %}">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-sm btn-success">
+                ➕ Install
+              </button>
+            </form>
+            {% else %}
+            <form method="post" action="{% url 'upgrade_module' module.id %}">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-sm btn-primary">
+                🔄 Upgrade
+              </button>
+            </form>
+            <form method="post" action="{% url 'uninstall_module' module.id %}" onsubmit="return confirm('Are you sure to uninstall this module?');">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-sm btn-danger">
+                🗑️ Uninstall
+              </button>
+            </form>
+            {% endif %}
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
