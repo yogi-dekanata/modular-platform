@@ -20,9 +20,11 @@ from django.urls import path, include
 
 from modular_platform.dynamic_urls import get_dynamic_module_urls
 from django.contrib.auth import views as auth_views
+from django.shortcuts import redirect
 
 
 urlpatterns = [
+    path('', lambda request: redirect('/product/')),
     path('admin/', admin.site.urls),
 
     # Modular Engine Module

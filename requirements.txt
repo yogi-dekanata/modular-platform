@@ -9,3 +9,5 @@ pathspec==0.12.1
 platformdirs==4.3.7
 sqlparse==0.5.3
 gunicorn
+whitenoise
+
